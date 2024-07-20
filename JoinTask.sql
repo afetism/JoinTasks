@@ -9,6 +9,31 @@
 
 --11. To deduce the most popular subjects (and) among students and teachers.
 --11. Student v? Teacherl?r aras?nda ?n m??hur mövzunu(lar?) ç?xar?n.
+WITH TotalCountofThems AS (
+SELECT Id_Themes, SUM(Count) AS TotalCount
+FROM (
+    SELECT Id_Themes, COUNT(Id_Themes) AS Count
+    FROM S_Cards 
+    JOIN Books ON S_Cards.Id_Book = Books.Id
+    JOIN Themes ON Books.Id_Themes = Themes.Id
+    GROUP BY Id_Themes
+    UNION ALL
+    SELECT Id_Themes, COUNT(Id_Themes) AS Count
+    FROM T_Cards 
+    JOIN Books ON T_Cards.Id_Book = Books.Id
+    JOIN Themes ON Books.Id_Themes = Themes.Id
+    GROUP BY Id_Themes
+) AS CombinedCounts
+GROUP BY Id_Themes
+),
+MaxCountOfThemes AS (
+SELECT MAX(TotalCount) AS MaxCount
+FROM TotalCountofThems
+)
+
+SELECT Themes.Id,Themes.Name
+FROM TotalCountofThems JOIN MaxCountOfThemes ON TotalCountofThems.TotalCount=MaxCountOfThemes.MaxCount
+                       JOIN Themes ON Themes.Id=TotalCountofThems.Id_Themes
 
 --12. Display the number of teachers and students who visited the library.
 --12. Kitabxanaya neç? t?l?b? v? neç? mü?llim g?ldiyini ekrana ç?xar?n.
