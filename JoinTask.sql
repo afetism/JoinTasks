@@ -37,3 +37,12 @@
 
 --20. Show how many books each librarian issued.
 --20. H?r kitbxanaç?n?n (libs) neç? kitab verdiyini ekrana ç?xar?n
+
+SELECT Libs.Id,COUNT(DISTINCT T_Cards.Id)+count(Distinct S_Cards.Id)
+FROM Libs JOIN S_Cards ON Libs.Id=S_Cards.Id_Lib
+          JOIN T_Cards ON Libs.Id=T_Cards.Id_Lib
+GROUP by Libs.Id
+
+
+
+
