@@ -28,6 +28,20 @@
 
 --17. Show all students and teachers of designers.
 --17. Dizayn sah?sind? olan bütün t?l?b? v? mü?lliml?ri ekrana ç?xar?n.
+select *
+from Departments
+select *
+from Faculties
+
+--SOLUTION:
+SELECT Teachers.FirstName+' '+Teachers.LastName
+FROM  Teachers  JOIN Departments ON Teachers.Id_Dep=Departments.Id   
+where Departments.Id=2
+Union 
+SELECT Students.FirstName+' '+Students.LastName
+FROM Students JOIN Groups ON Students.Id_Group=Groups.Id
+              JOIN Faculties ON Groups.Id_Faculty=Faculties.Id
+WHERE Faculties.Id=2
 
 --18. Show all information about students and teachers who have taken books.
 --18. Kitab götür?n t?l?b? v? mü?lliml?r haqq?nda informasiya ç?xar?n.
