@@ -31,7 +31,12 @@
 
 --18. Show all information about students and teachers who have taken books.
 --18. Kitab götür?n t?l?b? v? mü?lliml?r haqq?nda informasiya ç?xar?n.
-
+SELECT Teachers.FirstName+' '+Teachers.LastName
+FROM  Teachers  JOIN T_Cards ON Teachers.Id=T_Cards.Id_Teacher         
+Union 
+SELECT Students.FirstName+' '+Students.LastName
+FROM Students JOIN S_Cards ON Students.Id=S_Cards.Id_Book
+            
 --19. Show books that were taken by both teachers and students.
 --19. Mü?llim v? ?agirdl?rin c?mi neç? kitab götürdüyünü ekrana ç?xar?n.
 SELECT Books.Name
