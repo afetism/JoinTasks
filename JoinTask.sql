@@ -26,12 +26,24 @@
 --16. Display the names of the most popular books among teachers and students.
 --Mü?llim v? T?l?b?l?r aras?nda ?n m??hur kitablar?n adlar?n? ç?xar?n.
 
+SELECT Top 1 Books.Name,TotalBook.Id_Book
+FROM(SELECT Id_Book, SUM(BookCount) AS TotalCount
+FROM (
+    SELECT Id_Book, COUNT(Id_Book) AS BookCount
+    FROM S_Cards
+    GROUP BY Id_Book
+    UNION ALL
+    SELECT Id_Book, COUNT(Id_Book) AS BookCount
+    FROM T_Cards
+    GROUP BY Id_Book
+) AS CombinedCounts
+GROUP BY Id_Book
+) AS TotalBook JOIN Books ON TotalBook.Id_Book=Books.Id
+ORDER BY TotalBook.TotalCount DESC
+
 --17. Show all students and teachers of designers.
 --17. Dizayn sah?sind? olan bütün t?l?b? v? mü?lliml?ri ekrana ç?xar?n.
-select *
-from Departments
-select *
-from Faculties
+
 
 --SOLUTION:
 SELECT Teachers.FirstName+' '+Teachers.LastName
