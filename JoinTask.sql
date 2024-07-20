@@ -13,6 +13,15 @@
 --12. Display the number of teachers and students who visited the library.
 --12. Kitabxanaya neç? t?l?b? v? neç? mü?llim g?ldiyini ekrana ç?xar?n.
 
+SELECT SUM(Visitor) AS TotalVisitor
+FROM (
+SELECT count(distinct Id_Student) AS Visitor
+FROM S_Cards
+UNION 
+SELECT count(distinct Id_Teacher) AS Visitor
+FROM T_Cards) AS Vis
+
+
 --13. If you count the total number of books in the library for 100%, then you need to calculate how many books (in percentage terms) each faculty took.
 --13. ?g?r bütün kitablar?n say?n? 100% q?bul ets?k, siz h?r fakult?nin neç? faiz kitab götürdüyünü hesablamal?s?n?z.
 
