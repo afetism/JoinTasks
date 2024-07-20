@@ -34,7 +34,15 @@
 
 --19. Show books that were taken by both teachers and students.
 --19. Mü?llim v? ?agirdl?rin c?mi neç? kitab götürdüyünü ekrana ç?xar?n.
-
+SELECT Books.Name
+FROM  Teachers  JOIN T_Cards ON Teachers.Id=T_Cards.Id_Teacher
+                JOIN Books ON Books.Id=T_Cards.Id_Book
+Union 
+SELECT Books.Name
+FROM Students JOIN S_Cards ON Students.Id=S_Cards.Id_Book
+              JOIN Books ON Books.Id=S_Cards.Id_Book
+              
+              
 --20. Show how many books each librarian issued.
 --20. H?r kitbxanaç?n?n (libs) neç? kitab verdiyini ekrana ç?xar?n
 
